@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 from pages.BasePage import BasePage
 
@@ -9,6 +10,8 @@ class AdminMainPage(BasePage):
     CREATE_NEW_PRODUCT_BUTTON = (By.CSS_SELECTOR, "a[data-original-title='Add New']")
     SUCCESS_MESSAGE = (By.CSS_SELECTOR, "div.alert.alert-success.alert-dismissible")
 
+    @allure.step("Открыть страницу продукта")
     def open_products_page(self):
-        self.element(self.CATALOG).click()
-        self.element(self.PRODUCT_MENU_ITEM).click()
+        with allure.step(f"Открыть страницу продукта"):
+            self.element(self.CATALOG).click()
+            self.element(self.PRODUCT_MENU_ITEM).click()

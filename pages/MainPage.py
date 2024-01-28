@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 from pages.BasePage import BasePage
 from pages.elements.ListElement import ListElement
@@ -14,14 +15,17 @@ class MainPage(BasePage):
     CURRENCY_LIST = (By.CSS_SELECTOR, "#form-currency > div > ul")
     CURRENCY_LIST_ITEM = (By.CSS_SELECTOR, "li")
 
+    @allure.step("Смена валюты")
     def change_currency(self, text):
         currency_button = self.element(self.CURRENCY_BUTTON)
         currency_button.click()
         ListElement(self.browser).click_item(text)
 
+    @allure.step("Проверить кнопку корзины")
     def click_cart_button(self):
         self.element(self.CART_BUTTON).click()
 
+    @allure.step("Проверить пустой корзины")
     def check_empty_shopping_card_label(self):
         self.click_cart_button()
         return self.element(self.EMPTY_SHOPPING_CARD_LABEL).text == "Your shopping cart is empty!"

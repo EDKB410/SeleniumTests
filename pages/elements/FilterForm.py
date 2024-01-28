@@ -8,5 +8,5 @@ class FilterForm(BasePage):
     FILTER_BUTTON = (By.CSS_SELECTOR, "#button-filter")
 
     def filter_product_by_name(self, product_name):
-        self.send_keys(self.PRODUCT_NAME_INPUT, product_name)
+        self._send_keys(self.PRODUCT_NAME_INPUT, product_name)
         self.element(self.FILTER_BUTTON).click()

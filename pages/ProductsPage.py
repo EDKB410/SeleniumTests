@@ -1,5 +1,6 @@
 import time
 
+import allure
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.alert import Alert
 from pages.BasePage import BasePage
@@ -19,18 +20,23 @@ class ProductsPage(BasePage):
     PRODUCT_FORM = (By.CSS_SELECTOR, "#form-product")
     SELECT_ALL_CHECKBOX = (By.CSS_SELECTOR, 'input[type=checkbox]')
 
+    @allure.step("Клик на оздание нового товара")
     def click_add_new_product_button(self):
         self.element(self.CREATE_NEW_PRODUCT_BUTTON).click()
 
+    @allure.step("Сохранение нового товара")
     def click_save_product_button(self):
         self.element(self.SAVE_PRODUCT_BUTTON).click()
 
+    @allure.step("Таблица параметров")
     def click_nav_tab_data(self):
         self.element(self.NAV_TAB_DATA).click()
 
+    @allure.step("Подтсверждающее сообщение об успехе")
     def check_success_message(self):
         return self.element(self.SUCCESS_MESSAGE).text == "Success: You have modified products!"
 
+    @allure.step("Процесс создания нового товара")
     def create_new_product(self, product_name):
         self.click_add_new_product_button()
         ProductFormGeneral(self.browser).fill_in_all_fields(product_name)
@@ -39,6 +45,7 @@ class ProductsPage(BasePage):
         self.click_save_product_button()
         self.check_success_message()
 
+    @allure.step("Удаление товара")
     def delete_product(self, product_name):
         FilterForm(self.browser).filter_product_by_name(product_name)
         time.sleep(1)

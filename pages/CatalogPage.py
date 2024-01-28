@@ -1,5 +1,6 @@
 import time
 
+import allure
 from selenium.webdriver.common.by import By
 
 from pages.BasePage import BasePage
@@ -15,8 +16,10 @@ class CatalogPage(BasePage):
 
     def __init__(self, driver):
         super().__init__(driver)
-        self.browser.get(self.browser.url + "/index.php?route=product/category&path=20")
+        with allure.step(f"Открывается страница браузера"):
+            self.browser.get(self.browser.url + "/index.php?route=product/category&path=20")
 
+    @allure.step("Проверить элементы страницы каталога")
     def check_elements_on_page(self):
         self.element(self.HEADER)
         self.element(self.LIST_VIEW_BUTTON)

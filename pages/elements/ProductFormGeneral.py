@@ -17,11 +17,11 @@ class ProductFormGeneral(BasePage):
     SUBMIT_BUTTON = (By.CSS_SELECTOR, "input[type='submit']")
 
     def fill_in_all_fields(self, product_name):
-        self.send_keys(self.PRODUCT_NAME_INPUT, product_name)
-        self.send_keys(self.META_TAG_TITLE_INPUT, helpers.random_string(5))
-        self.send_keys(self.META_TAG_DESCRIPTION_INPUT, helpers.random_string(5))
-        self.send_keys(self.META_TAG_KEYWORD_INPUT, helpers.random_string(5))
-        self.send_keys(self.PRODUCT_TAGS_INPUT, helpers.random_string(5))
+        self._send_keys(self.PRODUCT_NAME_INPUT, product_name)
+        self._send_keys(self.META_TAG_TITLE_INPUT, helpers.random_string(5))
+        self._send_keys(self.META_TAG_DESCRIPTION_INPUT, helpers.random_string(5))
+        self._send_keys(self.META_TAG_KEYWORD_INPUT, helpers.random_string(5))
+        self._send_keys(self.PRODUCT_TAGS_INPUT, helpers.random_string(5))
 
     def submit_form(self):
         self.fill_in_all_fields()

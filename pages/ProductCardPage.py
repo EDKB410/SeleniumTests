@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 
 from pages.BasePage import BasePage
@@ -17,19 +18,24 @@ class ProductCardPage(BasePage):
 
     def __init__(self, driver):
         super().__init__(driver)
-        self.browser.get(self.browser.url + "/en-gb/product/apple-cinema")
+        with allure.step(f"Открывается страница браузера"):
+            self.browser.get(self.browser.url + "/en-gb/product/apple-cinema")
 
+    @allure.step("Проверить элементы страницы")
     def check_elements_on_page(self):
         self.element(self.HEADER)
         self.element(self.SMALL_RADIO)
         self.element(self.MEDIUM_RADIO)
         self.element(self.LARGE_RADIO)
 
+    @allure.step("Проверка радио-баттон")
     def check_small_radio(self):
         self.element(self.SMALL_RADIO).click()
 
+    @allure.step("Проверка радио-баттон")
     def check_medium_radio(self):
         self.element(self.MEDIUM_RADIO).click()
 
+    @allure.step("Проверка радио-баттон")
     def check_large_radio(self):
         self.element(self.LARGE_RADIO).click()

@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 
 import helpers
@@ -21,8 +22,10 @@ class RegistrationPage(BasePage):
 
     def __init__(self, driver):
         super().__init__(driver)
-        self.browser.get(self.browser.url + "/index.php?route=account/register")
+        with allure.step(f"Открывается страница браузера"):
+            self.browser.get(self.browser.url + "/index.php?route=account/register")
 
+    @allure.step("Проверка элементов на странице ")
     def check_elements_on_page(self):
         self.element(self.HEADER)
         self.element(self.ACCOUNT_LEGEND)
@@ -35,6 +38,7 @@ class RegistrationPage(BasePage):
         self.element(self.PRIVACY_POLICY_CHECKBOX)
         self.element(self.PRIVACY_POLICY_LINK)
 
+    @allure.step("Заполнить все поля")
     def input_all_fields(self):
         user_first_name = helpers.random_string(5)
         user_last_name = helpers.random_string(5)
@@ -46,10 +50,12 @@ class RegistrationPage(BasePage):
         self.element(self.PRIVACY_POLICY_CHECKBOX).click()
         self.element(self.SUBMIT_BUTTON).click()
 
+    @allure.step("Завершение регистрации")
     def check_registration_success(self):
         return self.element(self.SUCCESS_MESSAGE_HEADER) == "Your Account Has Been Created!" and \
                self.element(self.SUCCESS_MESSAGE_PARAGRAPH) == "Congratulations! Your new account has been successfully created!"
 
+    @allure.step("Регистрация нового юзера")
     def register_new_user(self):
         self.input_all_fields()
         self.check_registration_success()
